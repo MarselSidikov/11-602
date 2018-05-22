@@ -21,12 +21,14 @@ public class UserDetailsImpl implements UserDetails {
     private String passwordHash;
     private String login;
     private String role;
+    private String tempPasswordHash;
 
-    private UserDetailsImpl(Long id, String passwordHash, String login, String role) {
+    private UserDetailsImpl(Long id, String passwordHash, String tempPasswordHash, String login, String role) {
         this.id = id;
         this.passwordHash = passwordHash;
         this.login = login;
         this.role = role;
+        this.tempPasswordHash = tempPasswordHash;
     }
 
     @Override
@@ -38,6 +40,10 @@ public class UserDetailsImpl implements UserDetails {
     @Override
     public String getPassword() {
         return passwordHash;
+    }
+
+    public String getTempPasswordHash() {
+        return tempPasswordHash;
     }
 
     @Override
@@ -67,7 +73,7 @@ public class UserDetailsImpl implements UserDetails {
 
     public static UserDetailsImpl from(User user) {
         return new UserDetailsImpl(user.getId(),
-                user.getPasswordHash(), user.getLogin(),
+                user.getPasswordHash(), user.getTempPasswordHash(), user.getLogin(),
                 user.getRole().toString());
     }
 

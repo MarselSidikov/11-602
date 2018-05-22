@@ -29,6 +29,7 @@ public class User {
 
     private String login;
     private String passwordHash;
+    private String tempPasswordHash;
 
     @Enumerated(value = EnumType.STRING)
     private Role role;
